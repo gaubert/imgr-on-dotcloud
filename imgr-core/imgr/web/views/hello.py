@@ -6,8 +6,6 @@ Created on Aug 23, 2011
 
 from flask import Module, render_template, request, redirect, flash, url_for
 
-print(__name__)
-
 hello = Module(__name__)
 
 @hello.route('/hello')
