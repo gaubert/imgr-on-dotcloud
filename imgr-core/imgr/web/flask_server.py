@@ -8,7 +8,7 @@ from flask import g, Flask, render_template, request, redirect, flash, url_for, 
 from werkzeug import secure_filename
 from imgr.web.views.hello import hello
 
-UPLOAD_FOLDER = '/tmp/uploads'
+UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
