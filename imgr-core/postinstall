@@ -1,3 +1,5 @@
 #!/bin/bash
 
 ln -s /home/dotcloud/current/imgr/web/static /home/dotcloud/current/static
+
+ln -s /home/dotcloud/code/etc /home/dotcloud/current/etc

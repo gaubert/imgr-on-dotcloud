@@ -92,5 +92,5 @@ cp out.png $out
 
 rm -Rf $working_dir
 
-
+exit 0
 
