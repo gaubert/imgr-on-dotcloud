@@ -5,11 +5,11 @@ set -x
 #IMG_MANIP_HOME=/home/aubert/Dev/projects/imgr-on-dotcloud/etc
 #IMAGEMAGICK_DIR=/homespace/gaubert/ImageMagick-6.6.9-8
 # On my laptop 
-IMG_MANIP_HOME=/home/aubert/Dev/projects/imgr-on-dotcloud/etc
-IMAGEMAGICK_DIR=/usr
-# on dotcloud
-#IMG_MANIP_HOME=/home/dotcloud/code/etc
+#IMG_MANIP_HOME=/home/aubert/Dev/projects/imgr-on-dotcloud/etc
 #IMAGEMAGICK_DIR=/usr
+# on dotcloud
+IMG_MANIP_HOME=/home/dotcloud/code/etc
+IMAGEMAGICK_DIR=/usr
 
 font_dir=$IMG_MANIP_HOME/fonts/
 
