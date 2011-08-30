@@ -35,8 +35,10 @@ def allowed_file(filename):
 def build_command(a_in, a_input_text):
     """ build the command to execute """
     
-    #dir = "/home/dotcloud/code/etc/scripts"
+    # on my laptop
     dir = "/home/aubert/workspace/imgr-on-dotcloud/etc/scripts"
+    # on dotcloud
+    dir = "/home/dotcloud/current/etc/scripts"
     com = "bottom_card.sh"
     
     out = "%s/out_%s" % (RESULT_FOLDER, a_in)
