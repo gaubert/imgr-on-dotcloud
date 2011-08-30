@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#create links in current
 ln -s /home/dotcloud/current/imgr/web/static /home/dotcloud/current/static
 
 ln -s /home/dotcloud/code/etc /home/dotcloud/current/etc
+
+# create working dirs
+mkdir -p /tmp/uploads
+mkdir -p /tmp/results

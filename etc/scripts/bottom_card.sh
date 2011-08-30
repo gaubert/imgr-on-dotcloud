@@ -32,6 +32,8 @@ if [ -z "$out" ]; then
   exit 1
 fi
 
+rm -f $out
+
 if [ -z "$text" ]; then
   echo "text is not defined"
   exit 1
