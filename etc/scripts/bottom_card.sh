@@ -32,6 +32,7 @@ if [ -z "$out" ]; then
   exit 1
 fi
 
+# delete out
 rm -f $out
 
 if [ -z "$text" ]; then
@@ -58,7 +59,6 @@ out="`cd \"$D\" 2>/dev/null && pwd || echo \"$D\"`/$B"
 working_dir=/tmp/wrk_dir
 mkdir -p $working_dir
 
-rm -f out.jpg
 cd $working_dir
 
 #resize image and border of 25x25
