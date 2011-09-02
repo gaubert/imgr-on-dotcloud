@@ -3,3 +3,5 @@ www:
   approot: imgr-core
 data:
   type: redis
+worker:
+  type: python-worker
