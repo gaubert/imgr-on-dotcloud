@@ -1,3 +1,5 @@
 www:
   type: python
   approot: imgr-core
+data:
+  type: redis
