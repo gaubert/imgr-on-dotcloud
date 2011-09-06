@@ -2,8 +2,9 @@
 set -x
 
 # At work
-IMG_MANIP_HOME=/home/aubert/Dev/projects/imgr-on-dotcloud/etc
+IMG_MANIP_HOME=/homespace/gaubert/Dev/projects/imgr-on-dotcloud/etc
 IMAGEMAGICK_DIR=/homespace/gaubert/ImageMagick-6.6.9-8
+
 # On my laptop 
 #IMG_MANIP_HOME=/home/aubert/Dev/projects/imgr-on-dotcloud/etc
 #IMAGEMAGICK_DIR=/usr
@@ -61,14 +62,13 @@ mkdir -p $working_dir
 
 cd $working_dir
 
-#resize image and add border of 25x25
-$convert $in -normalize -resize 640 -bordercolor White -border 25x25 dummy.jpg
-# add bigger bottom border
-$convert dummy.jpg -gravity south -splice 0x60 -background White -gravity Center -append temp.jpg
+#resize image and add border of 25x25 | add bigger bottom border
+$convert $in -normalize -resize 640x480^ -bordercolor White -border 25x25 - | $convert - -gravity south -splice 0x60 -background White -gravity Center -append temp.jpg 
+
 #get width and height of the produced picture
-W=`convert dummy.jpg -format %w info:`
+#W=`convert dummy.jpg -format %w info:`
+W=`convert temp.jpg -format %w info:`
 #echo "W is $W"
-#H='convert temp.jpg -format %h info:'
 
 # create a mask fro rounding the borders
 # apply the mask
@@ -77,7 +77,7 @@ $convert temp.jpg -format 'roundrectangle 1,1 %[fx:w+4],%[fx:h+4] 15,15' info: >
 $convert temp.jpg -border 3 -alpha transparent -background none -fill white -stroke none -strokewidth 0 -draw "@rounded_corner.mvg" rounded_corner_mask.png
 $convert temp.jpg -matte -bordercolor none -border 3 rounded_corner_mask.png -compose DstIn -composite temp.png 
 # add drop shadow
-$convert temp.png \( +clone -background black -shadow 80x3+20+20 \) +swap -background white -layers merge +repage shadow.png 
+$convert temp.png \( +clone -background black -shadow 80x3+20+20 \) +swap -background white -layers merge +repage shadow.png
 #create label and add it with composite
 
 #$convert -font /homespace/gaubert/.gimp-2.6/plug-ins/fonts/Candice.ttf  -pointsize 36 label:"$text" label.png 
@@ -85,12 +85,12 @@ $convert temp.png \( +clone -background black -shadow 80x3+20+20 \) +swap -backg
 
 #label size: remove the 50 pixels corresponding to the borders
 W=$(($W-50))
-$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -gravity center -size "$W"x60 label:"$text" label.png
+$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -gravity center -size "$W"x60 label:"$text" label.jpg
 #when we have a label without any size
 #$composite label.png -gravity south -geometry +0+52 shadow.png out.png
 
-$composite label.png -gravity south -geometry +0+40 shadow.png out.png
-cp out.png $out
+$composite label.jpg -gravity south -geometry +0+40 shadow.png out.jpg
+cp out.jpg $out
 
 rm -Rf $working_dir
 
