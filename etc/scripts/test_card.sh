@@ -21,7 +21,7 @@ in=$1
 text=$2
 out=$3
 
-usage="./bottom_card.sh input_file \"My text to add\" output_file"
+usage="$0 input_file \"My text to add\" output_file"
 
 if [ -z "$in" ]; then
   echo "in is not defined"
@@ -69,30 +69,36 @@ $convert $in -normalize -resize 640x480^ -bordercolor White -border 25x25 - | $c
 #W=`convert dummy.jpg -format %w info:`
 W=`convert temp.jpg -format %w info:`
 #echo "W is $W"
+H=`convert temp.jpg -format %h info:`
 
 # create a mask fro rounding the borders
-# apply the mask
 #create mvg mask
+# apply the mask
 $convert temp.jpg -format 'roundrectangle 1,1 %[fx:w+4],%[fx:h+4] 15,15' info: > rounded_corner.mvg
 $convert temp.jpg -border 3 -alpha transparent -background none -fill white -stroke none -strokewidth 0 -draw "@rounded_corner.mvg" rounded_corner_mask.png
 $convert temp.jpg -matte -bordercolor none -border 3 rounded_corner_mask.png -compose DstIn -composite temp.png 
 # add drop shadow
 $convert temp.png \( +clone -background black -shadow 80x3+20+20 \) +swap -background white -layers merge +repage shadow.png
-#create label and add it with composite
 
+#create label and add it with composite
 #$convert -font /homespace/gaubert/.gimp-2.6/plug-ins/fonts/Candice.ttf  -pointsize 36 label:"$text" label.png 
 #$convert -font /homespace/gaubert/.gimp-2.6/plug-ins/fonts/Candice.ttf  -size "$W"x85 -pointsize 36 caption:"$text" label.png
 
 #label size: remove the 50 pixels corresponding to the borders
+# before version
+#W=$(($W-50))
+#$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -gravity center -size "$W"x60 label:"$text" label.jpg
 W=$(($W-50))
-$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -gravity center -size "$W"x60 label:"$text" label.jpg
+$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -size "$W"x60 label:"$text" label.jpg
 #when we have a label without any size
-#$composite label.png -gravity south -geometry +0+52 shadow.png out.png
+##$composite label.png -gravity south -geometry +0+52 shadow.png out.png
+#$composite label.jpg -gravity south -geometry +0+40 shadow.png out.jpg
+H=$(($H-60))
+$composite label.jpg -geometry +25+"$H" shadow.png out.jpg
 
-$composite label.jpg -gravity south -geometry +0+40 shadow.png out.jpg
 cp out.jpg $out
 
-rm -Rf $working_dir
+#rm -Rf $working_dir
 
 exit 0
 
