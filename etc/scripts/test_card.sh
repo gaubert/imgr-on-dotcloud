@@ -88,13 +88,18 @@ $convert temp.png \( +clone -background black -shadow 80x3+20+20 \) +swap -backg
 # before version
 #W=$(($W-50))
 #$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -gravity center -size "$W"x60 label:"$text" label.jpg
-W=$(($W-50))
+
+#adjust label width 45 seems to be the best for the moment
+W=$(($W-45))
+#60 is the size for a one liner
 $convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -size "$W"x60 label:"$text" label.jpg
 #when we have a label without any size
 ##$composite label.png -gravity south -geometry +0+52 shadow.png out.png
 #$composite label.jpg -gravity south -geometry +0+40 shadow.png out.jpg
-H=$(($H-60))
-$composite label.jpg -geometry +23+"$H" shadow.png out.jpg
+# ajust the height
+H=$(($H-63))
+# first value in geometry is the x position
+$composite label.jpg -geometry +21+"$H" shadow.png out.jpg
 
 cp out.jpg $out
 
