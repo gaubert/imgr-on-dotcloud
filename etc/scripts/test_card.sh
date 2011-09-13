@@ -94,7 +94,7 @@ $convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -size "$W"x60 label:"$text" lab
 ##$composite label.png -gravity south -geometry +0+52 shadow.png out.png
 #$composite label.jpg -gravity south -geometry +0+40 shadow.png out.jpg
 H=$(($H-60))
-$composite label.jpg -geometry +25+"$H" shadow.png out.jpg
+$composite label.jpg -geometry +23+"$H" shadow.png out.jpg
 
 cp out.jpg $out
 
