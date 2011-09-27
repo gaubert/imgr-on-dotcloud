@@ -92,14 +92,43 @@ $convert temp.png \( +clone -background black -shadow 80x3+20+20 \) +swap -backg
 #adjust label width 45 seems to be the best for the moment
 W=$(($W-45))
 #60 is the size for a one liner
-$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -size "$W"x60 label:"$text" label.jpg
+#$convert -font $IMG_MANIP_HOME/fonts/Candice.ttf -pointsize 50 -size "$W"x60 -gravity center label:"$text" label.jpg
+$convert -font $IMG_MANIP_HOME/fonts/communi.ttf -pointsize 33 -size "$W"x60 label:"$text" label.jpg
 #when we have a label without any size
 ##$composite label.png -gravity south -geometry +0+52 shadow.png out.png
 #$composite label.jpg -gravity south -geometry +0+40 shadow.png out.jpg
 # ajust the height
-H=$(($H-63))
+H=$(($H-68))
 # first value in geometry is the x position
-$composite label.jpg -geometry +21+"$H" shadow.png out.jpg
+$composite label.jpg -geometry +20+"$H" shadow.png out.jpg
+
+# when font is dynamic not -pointsize
+# with this font (Candice)19 characters can be put in one line for the max size font
+# From 20 up to will keep a correct size font
+# WHEN Font size is fixed and Candice
+# for up to 20 characters => pointsize 60
+# for up to 22 characters => pointsize 55
+# for up to 24 characters => pointsize 50
+# for up to 30 characters => pointsize 40 
+# for up to 40 characters => pointsize 30
+# with H=$(($H-68)) with this for Candice
+
+# For zil font
+# For up to 20 characters => pointsize 56 
+# For up to 24 characters => pointsize 43 
+# For up to 30 characters => pointsize 35 
+# For up to 40 characters => pointsize 27 
+# Need to calculate the center point
+
+# for communi font
+# For up to 20 characters => pointsize 58 
+# For up to 24 characters => pointsize 45 
+# For up to 30 characters => pointsize 35 
+# For up to 40 characters => pointsize 27 
+# Need to calculate the center point
+
+
+# -gravity center to center the font but without it, it is left justified
 
 cp out.jpg $out
 
